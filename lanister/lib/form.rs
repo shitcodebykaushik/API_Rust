@@ -30,7 +30,7 @@ fn index() -> String {
     let b = b.trim();
     
     if b == userpasswd1 {
-        output.push_str("Your password is ok!\n");
+        output.push_str("Your apassword is ok!\n");
     } else {
         output.push_str("Your password is wrong\n");
     }
@@ -41,4 +41,17 @@ fn index() -> String {
 #[launch]
 fn rocket() -> _ {
     rocket::build().mount("/", routes![index])
+}
+
+
+
+// This is the example of the  dynamic path in the routing . http://localhost:8000/data/raja   way to acces the resource .
+# [macro_use ] extern crate rocket;
+# [get ("/data/<say>")]
+fn welcome(say: &str) -> String {
+    format!("Hello, {}!",say)
+}
+#[launch]
+fn rocket() -> _ {
+    rocket::build().mount("/", routes![welcome])
 }
